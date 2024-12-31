@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Año Nuevo!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://source.unsplash.com/1600x900/?new-year,celebration') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+            color: #FFD700;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        #yesButton, #noButton {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        #yesButton {
+            background-color: #4CAF50;
+        }
+        #noButton {
+            background-color: #f44336;
+        }
+        #yesButton:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        #noButton:hover {
+            background-color: #d32f2f;
+            transform: scale(1.1);
+        }
+        #message {
+            margin-top: 40px;
+            font-size: 24px;
+            color: #FFD700;
+            font-weight: bold;
+            max-width: 600px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        .animated-button {
+            animation: bounce 0.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Estás listo para dar la bienvenida al Año Nuevo?</h1>
+    <div class="button-container">
+        <button id="yesButton" onclick="moveYesButton()" class="animated-button">¡Sí!</button>
+        <button id="noButton" onmouseover="moveButton()">No</button>
+    </div>
+    <p id="message"></p>
+
+    <script>
+        const noButton = document.getElementById("noButton");
+        const yesButton = document.getElementById("yesButton");
+        const message = document.getElementById("message");
+
+        let moveCount = 0;
+
+        function moveButton() {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            const newLeft = Math.random() * (windowWidth - noButton.clientWidth);
+            const newTop = Math.random() * (windowHeight - noButton.clientHeight);
+
+            noButton.style.position = "absolute";
+            noButton.style.left = newLeft + "px";
+            noButton.style.top = newTop + "px";
+        }
+
+        function moveYesButton() {
+            if (moveCount < 5) {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                const newLeft = Math.random() * (windowWidth - yesButton.clientWidth);
+                const newTop = Math.random() * (windowHeight - yesButton.clientHeight);
+
+                yesButton.style.position = "absolute";
+                yesButton.style.left = newLeft + "px";
+                yesButton.style.top = newTop + "px";
+
+                moveCount++;
+            } else {
+                askForPassword();
+            }
+        }
+
+        function askForPassword() {
+            const password = prompt("Introduce la contraseña para desbloquear la sorpresa:");
+            if (password === "2025") {
+                showMessage();
+            } else {
+                alert("¡Contraseña incorrecta! Inténtalo de nuevo.");
+            }
+        }
+
+        function showMessage() {
+            // Mensagem mais alegre e espontânea
+            message.innerHTML = `
+                ¡Felicidades! 🎉🎉<br><br>
+                ¡Este es el comienzo de un año lleno de magia, amor y nuevos comienzos!<br><br>
+                ¡Que todos tus sueños se hagan realidad! ¡Feliz Año Nuevo! 🥂✨  
+            `;
+            message.style.animation = "bounce 1s infinite";  // Animação para dar um efeito de destaque
+
+            yesButton.disabled = true;
+            noButton.disabled = true;
+        }
+    </script>
+</body>
+</html>
